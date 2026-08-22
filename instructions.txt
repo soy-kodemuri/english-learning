@@ -252,7 +252,7 @@ Never invent missing vocabulary.
 
 ## 16. SOURCE OF TRUTH
 
-The file `ENGLISH_MASTER_VOCABULARY` is the source of truth for my mastered vocabulary.
+The file `vocabulary.txt` is the source of truth for my mastered vocabulary.
 
 My conversation with you is NOT a replacement for that file.
 
