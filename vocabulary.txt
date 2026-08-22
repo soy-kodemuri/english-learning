@@ -22,19 +22,7 @@ they
 VERBS
 --------------------------------------------------
 
-go
-come
-want
-need
-like
-have
-make
-take
-give
-get
-know
-plan
-travel
+be
 
 
 --------------------------------------------------
