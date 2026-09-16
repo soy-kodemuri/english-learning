@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Punto de Venta — Los Propios Tacos</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body { background-color: #f4f6f9; }
+    .card-platillo { cursor: pointer; transition: transform 0.15s ease-in-out; }
+    .card-platillo:hover { transform: scale(1.02); }
+    .img-platillo { height: 160px; object-fit: cover; }
+  </style>
+</head>
+<body>
+
+<div class="container-fluid py-3">
+  <div class="row g-3">
+    
+    <!-- Catálogo de Productos (Fotos, Nombres y Precios) -->
+    <div class="col-md-8">
+      <div class="card shadow-sm border-0">
+        <!-- En la cabecera de ventas.html -->
+        <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center py-3">
+          <h4 class="mb-0 fw-bold">🌮 LOS PROPIOS TACOS — Menú de Ventas</h4>
+          <div>
+            <span class="badge bg-info text-dark fs-6 me-2" id="indicador-usuario">👤 Cargando...</span>
+            <span class="badge bg-warning text-dark fs-6">POS Activo</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <div id="grid-platillos" class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-3">
+            <!-- Carga dinámica de platillos desde la BD -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Carrito / Detalle de la Orden -->
+    <div class="col-md-4">
+      <div class="card shadow-sm border-0 sticky-top" style="top: 15px;">
+        <div class="card-header bg-primary text-white py-3">
+          <h5 class="mb-0 fw-bold">🛒 Orden Actual</h5>
+        </div>
+        <div class="card-body p-0">
+          <ul id="lista-carrito" class="list-group list-group-flush">
+            <li class="list-group-item text-center text-muted py-4">No hay ítems seleccionados</li>
+          </ul>
+        </div>
+        <div class="card-footer bg-white p-3">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <span class="fs-5 fw-bold">TOTAL:</span>
+            <span id="total-orden" class="fs-4 fw-bold text-success">$ 0</span>
+          </div>
+          <button id="btn-procesar-venta" class="btn btn-success btn-lg w-100 fw-bold" disabled>
+            ✅ Registrar Venta
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="./js/main_ventas.js"></script>
+<script src="js/navbar.js"></script>
+</body>
+</html>

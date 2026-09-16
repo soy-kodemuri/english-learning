@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Escritorio Principal — Los Propios Tacos</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body { background-color: #121212; color: #ffffff; min-height: 100vh; }
+    .card-modulo {
+      background: #1e1e1e;
+      border: 1px solid #333;
+      border-radius: 12px;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+      cursor: pointer;
+    }
+    .card-modulo:hover {
+      transform: translateY(-5px);
+      border-color: #ffc107;
+    }
+    .icono-modulo { font-size: 3rem; }
+  </style>
+</head>
+<body>
+
+<div class="container py-5">
+  <!-- Encabezado con sesión activa -->
+  <div class="d-flex justify-content-between align-items-center mb-5 pb-3 border-bottom border-secondary">
+    <div>
+      <h1 class="fw-bold text-warning mb-1">🌮 LOS PROPIOS TACOS</h1>
+      <p class="text-muted mb-0">Sistema Integral de Inventarios y Punto de Venta</p>
+    </div>
+    <div class="text-end">
+      <span id="indicador-usuario" class="badge bg-secondary fs-6 mb-2">👤 Cargando...</span><br>
+      <a href="backend/login.php" class="btn btn-outline-light btn-sm">🔒 Cambiar Usuario / Login</a>
+    </div>
+  </div>
+
+  <!-- Cuadrícula de Accesos Directos (Escritorio) -->
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+
+    <!-- 1. Punto de Venta (POS) -->
+    <div class="col">
+      <a href="ventas.html" class="text-decoration-none">
+        <div class="card card-modulo h-100 p-4 text-center text-white">
+          <div class="icono-modulo mb-2">🛒</div>
+          <h4 class="fw-bold text-warning">Punto de Venta (POS)</h4>
+          <p class="text-secondary small mb-0">Registrar ventas, cobrar pedidos y descontar insumos automáticamente.</p>
+        </div>
+      </a>
+    </div>
+
+    <!-- 2. Inventario Real -->
+    <div class="col">
+      <a href="inventario_real.html" class="text-decoration-none">
+        <div class="card card-modulo h-100 p-4 text-center text-white">
+          <div class="icono-modulo mb-2">📊</div>
+          <h4 class="fw-bold text-info">Inventario Real</h4>
+          <p class="text-secondary small mb-0">Consulta del stock disponible en tiempo real (Base + Traspasos - Ventas).</p>
+        </div>
+      </a>
+    </div>
+
+    <!-- 3. Ajuste de Inventario Físico -->
+    <div class="col">
+      <a href="ajuste_inventario.html" class="text-decoration-none">
+        <div class="card card-modulo h-100 p-4 text-center text-white">
+          <div class="icono-modulo mb-2">⚖️</div>
+          <h4 class="fw-bold text-success">Ajustes de Inventario</h4>
+          <p class="text-secondary small mb-0">Registrar conteos físicos, corregir mermas y gestionar catálogo de insumos.</p>
+        </div>
+      </a>
+    </div>
+
+    <!-- 4. Recetas (BOM) -->
+    <div class="col">
+      <a href="recetas.html" class="text-decoration-none">
+        <div class="card card-modulo h-100 p-4 text-center text-white">
+          <div class="icono-modulo mb-2">📖</div>
+          <h4 class="fw-bold text-danger">Recetas (BOM)</h4>
+          <p class="text-secondary small mb-0">Configurar los insumos y porciones requeridas para cada platillo del menú.</p>
+        </div>
+      </a>
+    </div>
+
+    <!-- 5. Traspasos entre Sucursales -->
+    <div class="col">
+      <a href="movimientos_sucursales.html" class="text-decoration-none">
+        <div class="card card-modulo h-100 p-4 text-center text-white">
+          <div class="icono-modulo mb-2">🚚</div>
+          <h4 class="fw-bold text-primary">Movimientos Sucursales</h4>
+          <p class="text-secondary small mb-0">Registrar entradas y salidas por préstamos o traspasos entre locales.</p>
+        </div>
+      </a>
+    </div>
+
+    <!-- 6. Inventario Base / Inicial -->
+    <div class="col">
+      <a href="inventario_base.html" class="text-decoration-none">
+        <div class="card card-modulo h-100 p-4 text-center text-white">
+          <div class="icono-modulo mb-2">📦</div>
+          <h4 class="fw-bold text-light">Inventario Base</h4>
+          <p class="text-secondary small mb-0">Consulta histórica del inventario inicial cargado en el sistema.</p>
+        </div>
+      </a>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  // Cargar el nombre del usuario conectado en el escritorio
+  document.addEventListener("DOMContentLoaded", async () => {
+    try {
+      const res = await fetch("backend/obtener_usuario_actual.php");
+      const data = await res.json();
+      const elem = document.getElementById("indicador-usuario");
+
+      if (elem) {
+        if (data.logueado) {
+          elem.textContent = `👤 Sesión: ${data.nombre}`;
+          elem.className = "badge bg-success fs-6 mb-2";
+        } else {
+          elem.textContent = "👤 Sin sesión activa";
+          elem.className = "badge bg-danger fs-6 mb-2";
+        }
+      }
+    } catch (err) {
+      console.error("Error al obtener datos del usuario:", err);
+    }
+  });
+</script>
+
+</body>
+</html>

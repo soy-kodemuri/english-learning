@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catálogo de Recetas — Los Propios Tacos</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body { background-color: #f8f9fa; }
+    .card-receta { border-left: 4px solid #0d6efd; }
+  </style>
+</head>
+<body>
+
+<div class="container my-4">
+  <div class="card shadow-sm mb-4">
+    <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center py-3">
+      <h4 class="mb-0">LOS PROPIOS TACOS — Recetario / BOM</h4>
+      <div>
+        <button id="btn-nueva-receta" class="btn btn-primary btn-sm me-2">
+          ➕ Nueva Receta
+        </button>
+        <button id="btn-recargar" class="btn btn-outline-light btn-sm">🔄 Recargar</button>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="row g-3">
+        <div class="col-md-6">
+          <input type="text" class="form-control" id="buscar-receta" placeholder="Buscar platillo o ingrediente...">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contenedor donde se renderizan las tarjetas de recetas -->
+  <div class="row g-4" id="contenedor-recetas">
+    <!-- Se llena dinámicamente -->
+  </div>
+</div>
+
+<!-- MODAL: Formulario para Agregar / Editar Receta -->
+<div class="modal fade" id="modalNuevaReceta" tabindex="-1" aria-labelledby="modalNuevaRecetaLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <form id="form-nueva-receta">
+        <!-- Campo oculto para saber si se edita un producto existente -->
+        <input type="hidden" id="platillo-id" value="">
+
+        <div class="modal-header bg-dark text-white">
+          <h5 class="modal-title" id="modalNuevaRecetaLabel">Registrar Receta</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        
+        <div class="modal-body">
+          <!-- Datos del Platillo -->
+          <div class="row g-3 mb-4">
+            <div class="col-md-8">
+              <label for="nombre-platillo" class="form-label fw-bold">Nombre del Platillo:</label>
+              <input type="text" class="form-control" id="nombre-platillo" placeholder="Ej. Orden de Tacos al Pastor" required>
+            </div>
+            <div class="col-md-4">
+              <label for="precio-platillo" class="form-label fw-bold">Precio de Venta ($):</label>
+              <input type="number" step="0.01" min="0" class="form-control" id="precio-platillo" placeholder="15000" required>
+            </div>
+          </div>
+
+          <hr>
+          
+          <!-- Lista Dinámica de Ingredientes -->
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h6 class="fw-bold mb-0">Ingredientes / Insumos Requeridos:</h6>
+            <button type="button" class="btn btn-outline-success btn-sm" id="btn-agregar-ingrediente">
+              ➕ Agregar Insumo
+            </button>
+          </div>
+
+          <div id="contenedor-ingredientes">
+            <!-- Filas de ingredientes agregadas dinámicamente -->
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary" id="btn-guardar-receta">Guardar Receta</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script type="module" src="./js/main_recetas.js"></script>
+<script src="js/navbar.js"></script>
+</body>
+</html>

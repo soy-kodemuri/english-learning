@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ajustes de Inventario — Los Propios Tacos</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body { background-color: #f8f9fa; }
+  </style>
+</head>
+<body>
+
+<div class="container my-4">
+  <div class="card shadow-sm mb-4">
+    <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center py-3">
+      <h4 class="mb-0">LOS PROPIOS TACOS — Control y Ajustes de Inventario</h4>
+      <div>
+        <button id="btn-nuevo-insumo" class="btn btn-success btn-sm me-2">➕ Nuevo Insumo</button>
+        <button id="btn-recargar" class="btn btn-outline-light btn-sm">🔄 Recargar</button>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-hover table-bordered align-middle">
+          <thead class="table-dark">
+            <tr>
+              <th>ID</th>
+              <th>INSUMO</th>
+              <th>UNIDAD</th>
+              <th>STOCK TEÓRICO</th>
+              <th>ÚLTIMO CONTEO</th>
+              <th>ACCIONES</th>
+            </tr>
+          </thead>
+          <tbody id="tabla-ajustes-body">
+            <!-- Renderizado dinámico -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL 1: Realizar Ajuste de Inventario Físico -->
+<div class="modal fade" id="modalAjuste" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form id="form-ajuste">
+        <input type="hidden" id="ajuste-insumo-id">
+        <div class="modal-header bg-warning text-dark">
+          <h5 class="modal-title fw-bold">Ajuste de Conteo Físico</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <p class="mb-2">Insumo: <strong id="ajuste-insumo-nombre" class="text-primary">---</strong></p>
+          <div class="mb-3">
+            <label class="form-label fw-bold">Cantidad Contada en Físico:</label>
+            <input type="number" step="any" min="0" class="form-control form-control-lg" id="ajuste-cantidad-real" required>
+            <div class="form-text">Al guardar, esta cantidad pasará a ser el nuevo stock inicial y las ventas futuras restarán desde este valor.</div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-bold">Responsable del Conteo:</label>
+            <input type="text" class="form-control" id="ajuste-responsable" placeholder="Ej. Juan Pérez" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-warning">Confirmar Ajuste</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL 2: Crear / Editar Catálogo de Insumo -->
+<div class="modal fade" id="modalInsumo" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form id="form-insumo">
+        <input type="hidden" id="insumo-id">
+        <div class="modal-header bg-dark text-white">
+          <h5 class="modal-title" id="modalInsumoLabel">Insumo</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label class="form-label fw-bold">Nombre del Insumo:</label>
+            <input type="text" class="form-control" id="insumo-nombre" placeholder="Ej. TORTILLA DE MAIZ" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-bold">Unidad de Medida:</label>
+            <select class="form-select" id="insumo-unidad" required>
+              <option value="UNIDAD">UNIDAD</option>
+              <option value="GR">GRAMOS (GR)</option>
+              <option value="KG">KILOGRAMOS (KG)</option>
+              <option value="ML">MILILITROS (ML)</option>
+              <option value="LTS">LITROS (LTS)</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Guardar Insumo</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script type="module" src="./js/main_ajustes.js"></script>
+<script src="js/navbar.js"></script>
+</body>
+</html>
